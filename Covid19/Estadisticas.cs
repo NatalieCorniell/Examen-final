@@ -5,7 +5,7 @@ namespace Covid19
     {
         public static void VerEstadisticaActual(bool IsWait = false)
         {
-            DateTime TODAY = DateTime.Today;
+            _ = DateTime.Today;
             int count1 = 1;
 
             foreach (CasoActual Element in CasoActual._Pronvincias)
