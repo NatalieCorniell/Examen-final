@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-
-
 namespace Covid19
 {
-    [Serializable]
-    public class Datos
+    public class DatosActual
     {
-        //__________________________________AGENDAMIENTO ANTEORIOR______________________________________
-        public static void RegistrarDiaAnterior()
+        public static void RegistrarDiaActual()
         {
             try
             {
                 Console.Clear();
+
+                DateTime dia = DateTime.Today;
+
 
                 Console.Write("\t\t  COVID-19: ");
 
@@ -22,7 +20,7 @@ namespace Covid19
 
                 var indexx = IndexNombreProvincia;
 
-                string NombreProvincia = CRUD.GetElement(CasoAnterior._ListadoPronvincias, indexx - 1);
+                string NombreProvincia = CRUD.GetElement(CasoActual._ListadoPronvincias, indexx - 1);
 
                 Console.WriteLine("\n\n\t Llene los campos ");
                 Console.Write("\t Casos: ");
@@ -31,10 +29,7 @@ namespace Covid19
                 double fallecidos = Convert.ToDouble(Console.ReadLine());
                 Console.Write("\t Recuperados: ");
                 double recuperados = Convert.ToDouble(Console.ReadLine());
-                Console.Write("\t Dia -Nota:Favor utilizar este formato(mm/dd/yyyy) \n\t Ejemplo:(01/01/2020)  : ");
-                DateTime dia = Convert.ToDateTime(Console.ReadLine());
-
-
+               
 
                 string diaexacto = ("Dia:  " + dia.Day + "/" + dia.Month + "/" + dia.Year);
                 Console.WriteLine("\n\n\t " + diaexacto);
@@ -45,16 +40,16 @@ namespace Covid19
                 {
                     Console.WriteLine("\n\t Debe llenar todos los campos. \n ");
                     Console.ReadKey();
-                    RegistrarDiaAnterior();
+                    RegistrarDiaActual();
                 }
                 else
                 {
 
                     if (Validation(DiaRegistrado))
                     {
-                        CRUD.Add(CasoAnterior._Dias, DiaRegistrado);
-                        CRUD.Add(CasoAnterior._PronvinciasValidation, NombreProvincia);
-                        CasoAnterior CA = new CasoAnterior
+                        CRUD.Add(CasoActual._Dias, DiaRegistrado);
+                        CRUD.Add(CasoActual._PronvinciasValidation, NombreProvincia);
+                        CasoActual CA = new CasoActual
                         {
                             NombreProvinicia = NombreProvincia,
                             Casos = casos,
@@ -62,14 +57,15 @@ namespace Covid19
                             Recuperados = recuperados,
                             Dia = dia
                         };
-                        CRUD.Add(CasoAnterior._Pronvincias, CA);
+                        CRUD.Add(CasoActual._Pronvincias, CA);
 
                         RegistroCasos registroCasos = new RegistroCasos
                         {
-                            CasosAnterior = casos
+                            CasosActual = casos 
                         };
 
-                        RegistroCasos.TotalCasosAnterior.Add(casos);
+                        RegistroCasos.TotalCasosActual.Add(casos);
+                        //CRUD.GetElement(RegistroCasos.Informacion, registroCasos);
                     }
                     else
                     {
@@ -80,7 +76,7 @@ namespace Covid19
 
                 }
 
-                if (CasoAnterior._Pronvincias.Count != 0)
+                if (CasoActual._Pronvincias.Count != 0)
                 {
                     Console.WriteLine("\t\t REGISTRO ALMACENADO\n");
 
@@ -88,11 +84,11 @@ namespace Covid19
                     string seleccion = Console.ReadLine();
                     if (seleccion == "s")
                     {
-                        RegistrarDiaAnterior();
+                        RegistrarDiaActual();
                     }
 
                     Console.ReadKey();
-                        MenuAdmin.Menu_Admin();
+                    MenuAdmin.Menu_Admin();
 
                 }
             }
@@ -101,13 +97,13 @@ namespace Covid19
                 Console.Clear();
                 Console.WriteLine("\n\n \t\t ERROR!! \n");
                 Console.ReadKey();
-                RegistrarDiaAnterior();
+                RegistrarDiaActual();
             }
         }
         public static bool Validation(string Elements)
         {
             bool valid = true;
-            foreach (string element in CasoAnterior._Dias)
+            foreach (string element in CasoActual._Dias)
             {
                 if (element == Elements)
                 {
@@ -119,42 +115,42 @@ namespace Covid19
         }
         public static void MostrarProvincias(bool IsWait = false)
         {
-            CasoAnterior._ListadoPronvincias.Add("Azua");
-            CasoAnterior._ListadoPronvincias.Add(" Bahoruco");
-            CasoAnterior._ListadoPronvincias.Add(" Barahona");
-            CasoAnterior._ListadoPronvincias.Add(" Dajabón");
-            CasoAnterior._ListadoPronvincias.Add(" Distrito");
-            CasoAnterior._ListadoPronvincias.Add(" Duarte");
-            CasoAnterior._ListadoPronvincias.Add(" ElíasPiña");
-            CasoAnterior._ListadoPronvincias.Add(" ElSeiboo");
-            CasoAnterior._ListadoPronvincias.Add(" Espaillat");
-            CasoAnterior._ListadoPronvincias.Add(" HatoMayor");
-            CasoAnterior._ListadoPronvincias.Add(" HermanasMirabal");
-            CasoAnterior._ListadoPronvincias.Add(" Independencia");
-            CasoAnterior._ListadoPronvincias.Add(" LaAltagracia");
-            CasoAnterior._ListadoPronvincias.Add(" LaRomana");
-            CasoAnterior._ListadoPronvincias.Add(" LaVega");
-            CasoAnterior._ListadoPronvincias.Add(" MaríaTrinidadSánchez");
-            CasoAnterior._ListadoPronvincias.Add(" MonseñorNouel");
-            CasoAnterior._ListadoPronvincias.Add(" MonteCristi");
-            CasoAnterior._ListadoPronvincias.Add(" MontePlatata");
-            CasoAnterior._ListadoPronvincias.Add(" Pedernales");
-            CasoAnterior._ListadoPronvincias.Add(" Peravia");
-            CasoAnterior._ListadoPronvincias.Add(" PuertoPlata");
-            CasoAnterior._ListadoPronvincias.Add(" Samaná");
-            CasoAnterior._ListadoPronvincias.Add(" SanCristóbal");
-            CasoAnterior._ListadoPronvincias.Add(" SanJosédeOcoa");
-            CasoAnterior._ListadoPronvincias.Add(" SanJuan");
-            CasoAnterior._ListadoPronvincias.Add(" SanPedrodeMacorís");
-            CasoAnterior._ListadoPronvincias.Add(" SánchezRamírez");
-            CasoAnterior._ListadoPronvincias.Add(" Santiago");
-            CasoAnterior._ListadoPronvincias.Add(" SantiagoRodríguez");
-            CasoAnterior._ListadoPronvincias.Add(" SantoDomingo");
-            CasoAnterior._ListadoPronvincias.Add(" Valverde");
+            CasoActual._ListadoPronvincias.Add("Azua");
+            CasoActual._ListadoPronvincias.Add(" Bahoruco");
+            CasoActual._ListadoPronvincias.Add(" Barahona");
+            CasoActual._ListadoPronvincias.Add(" Dajabón");
+            CasoActual._ListadoPronvincias.Add(" Distrito");
+            CasoActual._ListadoPronvincias.Add(" Duarte");
+            CasoActual._ListadoPronvincias.Add(" ElíasPiña");
+            CasoActual._ListadoPronvincias.Add(" ElSeiboo");
+            CasoActual._ListadoPronvincias.Add(" Espaillat");
+            CasoActual._ListadoPronvincias.Add(" HatoMayor");
+            CasoActual._ListadoPronvincias.Add(" HermanasMirabal");
+            CasoActual._ListadoPronvincias.Add(" Independencia");
+            CasoActual._ListadoPronvincias.Add(" LaAltagracia");
+            CasoActual._ListadoPronvincias.Add(" LaRomana");
+            CasoActual._ListadoPronvincias.Add(" LaVega");
+            CasoActual._ListadoPronvincias.Add(" MaríaTrinidadSánchez");
+            CasoActual._ListadoPronvincias.Add(" MonseñorNouel");
+            CasoActual._ListadoPronvincias.Add(" MonteCristi");
+            CasoActual._ListadoPronvincias.Add(" MontePlatata");
+            CasoActual._ListadoPronvincias.Add(" Pedernales");
+            CasoActual._ListadoPronvincias.Add(" Peravia");
+            CasoActual._ListadoPronvincias.Add(" PuertoPlata");
+            CasoActual._ListadoPronvincias.Add(" Samaná");
+            CasoActual._ListadoPronvincias.Add(" SanCristóbal");
+            CasoActual._ListadoPronvincias.Add(" SanJosédeOcoa");
+            CasoActual._ListadoPronvincias.Add(" SanJuan");
+            CasoActual._ListadoPronvincias.Add(" SanPedrodeMacorís");
+            CasoActual._ListadoPronvincias.Add(" SánchezRamírez");
+            CasoActual._ListadoPronvincias.Add(" Santiago");
+            CasoActual._ListadoPronvincias.Add(" SantiagoRodríguez");
+            CasoActual._ListadoPronvincias.Add(" SantoDomingo");
+            CasoActual._ListadoPronvincias.Add(" Valverde");
 
             Console.WriteLine("\n\t Listado de Provincias: ");
             int count = 1;
-            foreach (string Element in CasoAnterior._ListadoPronvincias)
+            foreach (string Element in CasoActual._ListadoPronvincias)
             {
                 Console.WriteLine(count + "-" + Element + ".\n");
                 count++;
@@ -164,7 +160,6 @@ namespace Covid19
                 Console.ReadKey();
             }
         }
-       
+     
     }
-
 }

@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-
-
 namespace Covid19
 {
-    [Serializable]
-    public class Datos
+    public class DatosHoy
     {
-        //__________________________________AGENDAMIENTO ANTEORIOR______________________________________
-        public static void RegistrarDiaAnterior()
+        public static void RegistrarDiaActual()
         {
             try
             {
@@ -31,7 +26,7 @@ namespace Covid19
                 double fallecidos = Convert.ToDouble(Console.ReadLine());
                 Console.Write("\t Recuperados: ");
                 double recuperados = Convert.ToDouble(Console.ReadLine());
-                Console.Write("\t Dia -Nota:Favor utilizar este formato(mm/dd/yyyy) \n\t Ejemplo:(01/01/2020)  : ");
+                Console.Write("\t Dia -Nota:Favor utilizar este formato(mm/dd/yyyy) : ");
                 DateTime dia = Convert.ToDateTime(Console.ReadLine());
 
 
@@ -63,13 +58,22 @@ namespace Covid19
                             Dia = dia
                         };
                         CRUD.Add(CasoAnterior._Pronvincias, CA);
+                        /* RegistroCasos registroCasos = new RegistroCasos
+                         {
+                             CasosRegistrados = casos,
+                             Dia = dia
+                         };
 
-                        RegistroCasos registroCasos = new RegistroCasos
-                        {
-                            CasosAnterior = casos
-                        };
+                         CasosActuales casosActuales = new CasosActuales {Caso = casos};
+                         CasosActuales._CasosActuales.Add(casosActuales);
 
-                        RegistroCasos.TotalCasosAnterior.Add(casos);
+
+                         CRUD.Add(RegistroCasos.Informacion, registroCasos);
+
+
+                         //CRUD.GetElement(RegistroCasos.Informacion, registroCasos);
+                         */
+
                     }
                     else
                     {
@@ -92,7 +96,7 @@ namespace Covid19
                     }
 
                     Console.ReadKey();
-                        MenuAdmin.Menu_Admin();
+                    MenuAdmin.Menu_Admin();
 
                 }
             }
@@ -164,7 +168,77 @@ namespace Covid19
                 Console.ReadKey();
             }
         }
-       
-    }
+        public static void VerEstadisticas(bool IsWait = false)
+        {
+            Console.Clear();
+            Console.WriteLine("\n\t ESTADÍSTICAS: -Listado de Provincias- \n");
+            int count1 = 1;
 
+            foreach (CasoAnterior Element in CasoAnterior._Pronvincias)
+            {
+                Console.WriteLine(" Fecha de registro:  " + Element.Dia.Day + "/" + Element.Dia.Month + "/" + Element.Dia.Year + " .\n ");
+
+                if (Element.Variacion <= 0)
+                {
+                    Console.WriteLine(count1 + " " + Element.NombreProvinicia + " .\n" +
+                                        " - Casos registardos:" + Element.Casos + " .\n" +
+                                        " - Fallecidos: " + Element.Fallecidos + " .\n" +
+                                        " - Recuperados: " + Element.Recuperados + " .\n" +
+                                        " - Variacion: No hubo variación .\n");
+                }
+                else
+                {
+                    Console.WriteLine(count1 + " " + Element.NombreProvinicia + " .\n" +
+                                          " - Casos registardos:" + Element.Casos + " .\n" +
+                                          " - Fallecidos: " + Element.Fallecidos + " .\n" +
+                                          " - Recuperados: " + Element.Recuperados + " .\n" +
+                                          " - Variacion: " + Element.Variacion + " .\n");
+                }
+
+                count1++;
+            }
+            //Estimacion();
+            if (IsWait)
+            {
+                Console.ReadKey();
+            }
+
+        }
+        public static void Estimacion()
+        {
+            /*  var dia = DateTime.Today;
+             var yesterday = dia.AddDays(-1);
+
+             int countCasos = 1;
+             foreach (RegistroCasos casos in RegistroCasos.Informacion)
+             {
+                 Console.WriteLine(countCasos + " - Casos dia anterior" +
+                                         " - Casos registardos:" + casos.CasosRegistrados + " .\n" +
+                                         " - Dia: " + casos.Dia.AddDays(-1) + " .\n");
+
+
+                 countCasos++;
+                 double casosTotalRegistrados = casos.CasosRegistrados += casos.CasosRegistrados;
+
+
+                 CRUD.GetElement(RegistroCasos.Informacion,);
+
+                 Console.WriteLine("\t\t ##############################");
+                 Console.WriteLine("\t\t ## Estimación: " + casos + "##");
+                 Console.WriteLine("\t\t ##############################");
+
+
+             double Cantidad_Actual = CasosActuales._CasosActuales;// ;
+             double Cantidad_Anterior = casosTotalRegistrados; //CasosRegistrados;
+             double Factor_Contagio = 0;
+             double Estimacion = 0;
+
+             Factor_Contagio = Cantidad_Actual / Cantidad_Anterior;
+             Estimacion = Factor_Contagio * Cantidad_Actual;
+             var total = Math.Round(Estimacion);
+        }
+        */
+        }
+        public static void RegistrarDiaActual() { }
+    }
 }

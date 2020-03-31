@@ -4,19 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using static Covid19.Datos;
+using static Covid19.DatosActual;
+
 namespace Covid19
 {
-    public class Menu
+    public class MenuAdmin
     {
-        //public static double CasosRegistrados { get; set; }
-
-
-                            
+                       
     public static readonly SerializeController serializeController = new SerializeController();
 
-        public Menu()
-        {
-        }
+        
         public static void Menu_Admin()
         {
             Datos datos = new Datos();
@@ -95,7 +93,8 @@ namespace Covid19
                 Console.WriteLine("\t\t Menu Principal \n");
                 Console.WriteLine("\t\t 1. Registrar día.");
                 Console.WriteLine("\t\t 2. Ver estadística. ");
-                Console.WriteLine("\t\t 3. Finalizar Agendamiento. \n");
+                Console.WriteLine("\t\t 3. Ver estimación para el dia de Mañana \n");
+                Console.WriteLine("\t\t 4. Finalizar Agendamiento. \n");
 
                 try
                 {
@@ -104,13 +103,15 @@ namespace Covid19
                     switch (Menu)
                     {
                         case 1:
-
-                            Datos.RegistrarDia();
+                            MenuRegistro();
                             break;
                         case 2:
-                            Datos.VerEstadisticas(true);
+                            Estadisticas.VerEstadisticaGeneral(true);
                             break;
                         case 3:
+                            Estimacion.EstimacionGeneral();
+                            break;
+                        case 4:
                             IFormatter formatter = new BinaryFormatter();
                             Stream stream = new FileStream("DATABASE.dat", FileMode.Create, FileAccess.Write);
 
@@ -136,6 +137,41 @@ namespace Covid19
                 catch (Exception) { Menu_Admin(); }
 
             }
+        }
+
+
+        public static object MenuRegistro()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("\t\t Menu Principal \n");
+                Console.WriteLine("\t\t 1. Registrar día anterior.");
+                Console.WriteLine("\t\t 2. Registrar el día hoy. ");
+                Console.WriteLine("\t\t 3. Volver a menu principal. \n");
+
+                try
+                {
+                    Console.Write("\t Ingrese el número segun la opcion deseada: ");
+                    int Menu = Convert.ToInt32(Console.ReadLine());
+                    switch (Menu)
+                    {
+                        case 1:
+                         RegistrarDiaAnterior();
+                            break;
+                        case 2:
+                            RegistrarDiaActual();
+                            break;
+                        case 3:
+                           Menu_Admin();
+                            break;
+                    }
+                }
+                catch (Exception) { MenuRegistro(); }
+
+            }
+
+            //__________________________________AGENDAMIENTO ANTEORIOR______________________________________
         }
     }
 }

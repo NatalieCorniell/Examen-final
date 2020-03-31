@@ -36,6 +36,12 @@
     <Compile Include="Datos.cs" />
     <Compile Include="SerializeController.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="RegistroCasos.cs" />
+    <Compile Include="CasoAnterior.cs" />
+    <Compile Include="CasoActual.cs" />
+    <Compile Include="DatosActual.cs" />
+    <Compile Include="Estadisticas.cs" />
+    <Compile Include="Estimacion.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

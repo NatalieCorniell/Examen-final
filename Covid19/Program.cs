@@ -10,7 +10,7 @@ namespace Covid19
     {
         public static void Main(string[] args)
         {
-            Menu.Menu_Admin();
+            MenuAdmin.Menu_Admin();
         }
        
     }

@@ -19,6 +19,10 @@ namespace Covid19
         {
             list.Add(item);
         }
+       /* public static void AddCA<>(List<T> list, T item)
+        {
+            list.Add(item);
+        }*/
         public static T GetElement<T>(List<T> list, int index)
         {
             return list[index];
