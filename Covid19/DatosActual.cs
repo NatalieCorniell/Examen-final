@@ -64,7 +64,7 @@ namespace Covid19
                             CasosActual = casos 
                         };
 
-                        RegistroCasos.TotalCasosActual.Add(casos);
+                       RegistroCasos.TotalCasosActual.Add(casos);
                         //CRUD.GetElement(RegistroCasos.Informacion, registroCasos);
                     }
                     else

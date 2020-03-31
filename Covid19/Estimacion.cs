@@ -6,10 +6,8 @@ namespace Covid19
 
         public static void EstimacionGeneral()
         {
-
-            var CasosAnteriores = CasoAnterior.Casos;
             Console.WriteLine("\t\t ##############################");
-            Console.WriteLine("\t\t ## Estimación: " + casos + "##");
+            Console.WriteLine("\t\t ## Estimación:  ##");
             Console.WriteLine("\t\t ##############################");
 
 

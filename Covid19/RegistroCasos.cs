@@ -7,15 +7,20 @@ namespace Covid19
 
         public static List<double> TotalCasosAnterior = new List<double>();
         public static List<double> TotalCasosActual = new List<double>();
+        public static List<List<double>> TotalDeverdad = new List<List<double>>();
 
-        public  double CasosAnterior { get; set; }
+        public double CasosAnterior { get; set; }
         public double CasosActual { get; set; }
+
+
 
 
         public static void Total()
         {
 
+
             double Total = 0;
+
             int count = 1;
             foreach (double Element in TotalCasosActual)
             {
@@ -23,19 +28,18 @@ namespace Covid19
                 double suma = Element + Element;
                 Console.WriteLine(count + "- Suma de casos-Actuales" + suma + ".\n");
                 count++;
+                
+
+                int count2 = 1;
+                foreach (double Element2 in TotalCasosAnterior)
+                {
+                    double suma2 = Element2 + Element2;
+
+                    Console.WriteLine(count2 + "- Suma de casos-Anteriores" + suma + ".\n");
+                    count2++;
+                }
+
             }
-
-
-            int count2  = 1;
-            foreach (double Element in TotalCasosAnterior)
-            {
-                double suma = Element + Element;
-
-                Console.WriteLine(count + "- Suma de casos-Anteriores" + suma +  ".\n");
-                count2++;
-            }
-
-            
 
         }
         public static void AddCaso<T>(List<T> list, T item)
